@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XENO // Advanced Neuro-Tactical Interface</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&family=Share+Tech+Mono&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-deep: #020205;
+            --bg-panel: rgba(10, 12, 22, 0.75);
+            --synapse-blue: #00e5ff;
+            --plasma-orange: #ff6c00;
+            --alert-glow: rgba(0, 229, 255, 0.2);
+            --text-bright: #ffffff;
+            --text-dim: #70849e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        /* Moving Cyber-Nebula & High-Tech Grid Background */
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-bright);
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 229, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 108, 0, 0.07) 0%, transparent 45%),
+                linear-gradient(rgba(0, 229, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.015) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            z-index: -2;
+            animation: backgroundShift 25s infinite alternate ease-in-out;
+        }
+
+        @keyframes backgroundShift {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); background-position: 20px 20px; }
+        }
+
+        h1, h2, h3, .heading-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        /* --- IMMERSIVE APP HEADER --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 6%;
+            border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+            background: rgba(4, 5, 10, 0.85);
+            backdrop-filter: blur(15px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 15px var(--synapse-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--plasma-orange);
+            box-shadow: 0 0 10px var(--plasma-orange);
+            display: inline-block;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--synapse-blue);
+            text-shadow: 0 0 8px var(--synapse-blue);
+        }
+
+        /* Custom Language Engine Box */
+        .lang-container {
+            border: 1px solid var(--plasma-orange);
+            background: #090b12;
+            padding: 6px 12px;
+            box-shadow: 0 0 10px rgba(255, 108, 0, 0.1);
+        }
+
+        .lang-select {
+            background: transparent;
+            color: #fff;
+            border: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .lang-select option {
+            background: #0a0c16;
+            color: #fff;
+        }
+
+        /* --- HERO DISPLAY LAYER --- */
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero h1 {
+            font-size: 4.2rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+
+        .hero h1 span {
+            color: var(--synapse-blue);
+            text-shadow: 0 0 25px rgba(0, 229, 255, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .cta-glow-btn {
+            font-family: 'Orbitron', sans-serif;
+            background: transparent;
+            color: var(--plasma-orange);
+            padding: 18px 45px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            border: 2px solid var(--plasma-orange);
+            cursor: pointer;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+            transition: all 0.3s ease;
+        }
+
+        .cta-glow-btn:hover {
+            background: var(--plasma-orange);
+            color: #000;
+            box-shadow: 0 0 35px var(--plasma-orange);
+        }
+
+        /* --- INTERACTIVE TECH SUITE (MAIN GRID) --- */
+        .workspace {
+            max-width: 1300px;
+            margin: 0 auto 60px auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 950px) {
+            .workspace { grid-template-columns: 1fr; }
+        }
+
+        .glass-panel {
+            background: var(--bg-panel);
+            border: 1px solid rgba(0, 229, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 35px;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05);
+        }
+
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--synapse-blue), transparent);
+        }
+
+        .panel-orange::before {
+            background: linear-gradient(90deg, var(--plasma-orange), transparent);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        /* Interactive Bio-Diagnostics Module */
+        .scanner-hud {
+            background: rgba(5, 6, 12, 0.8);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            padding: 25px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .scan-bar-container {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            height: 12px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+        }
+
+        .scan-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--synapse-blue), #0088ff);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* Decorative Live Audio/Bandwidth Equalizer Bars */
+        .audio-eq-bars {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 6px;
+            height: 40px;
+            margin-top: 20px;
+        }
+
+        .eq-bar {
+            width: 5px;
+            height: 10px;
+            background: var(--plasma-orange);
+            animation: bounceBars 0.6s ease infinite alternate;
+        }
+        .eq-bar:nth-child(2n) { animation-duration: 0.4s; background: var(--synapse-blue); }
+        .eq-bar:nth-child(3n) { animation-duration: 0.8s; }
+
+        @keyframes bounceBars {
+            0% { height: 5px; }
+            100% { height: 38px; }
+        }
+
+        /* Real-Time Terminal Output Feed */
+        .console-box {
+            background: #030408;
+            border: 1px solid rgba(255, 108, 0, 0.2);
+            height: 200px;
+            overflow-y: hidden;
+            padding: 15px;
+            font-size: 0.9rem;
+            color: var(--plasma-orange);
+            line-height: 1.6;
+        }
+
+        .console-line { margin-bottom: 4px; }
+        .stamp { color: var(--synapse-blue); margin-right: 8px; }
+        .text-alert { color: #ff3b30; font-weight: bold; }
+
+        /* --- SYSTEM WALKTHROUGH FEATURE --- */
+        .system-walkthrough {
+            max-width: 1240px;
+            margin: 0 auto 80px auto;
+            padding: 0 30px;
+        }
+
+        .walkthrough-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .walkthrough-card {
+            background: rgba(10, 12, 22, 0.5);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .walkthrough-card:hover {
+            border-color: var(--synapse-blue);
+            transform: translateY(-5px);
+            background: rgba(0, 229, 255, 0.02);
+        }
+
+        .walkthrough-card h3 {
+            color: var(--synapse-blue);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .walkthrough-card p {
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand"><div class="brand-dot"></div>XENO<span>.OS</span></div>
+        <nav>
+            <a href="#" class="active" id="ln-nav-home">System Overview</a>
+            <a href="#" id="ln-nav-ops">Core Ops</a>
+            <a href="#" id="ln-nav-shield">Shield Security</a>
+            
+            <div class="lang-container">
+                <select id="lang-engine-trigger" class="lang-select" onchange="processGlobalTranslation()">
+                    <option value="en">English (US Mainframe)</option>
+                    <option value="hi">हिन्दी (Hindi Core)</option>
+                    <option value="es">Español (Spanish Dev)</option>
+                    <option value="zh">中文 (Mandarin Node)</option>
+                    <option value="ja">日本語 (Japanese Sync)</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1 id="ln-hero-title">Neural Platforms<br><span>Reconstructed.</span></h1>
+        <p id="ln-hero-desc">Experience an unprecedented architectural standard in biomechanical human system links. This core deployment mainframe initiates sub-atomic encryption nodes and hyper-frequency node protection routines seamlessly.</p>
+        <button class="cta-glow-btn" id="ln-hero-btn" onclick="engageShieldVerification()">EXECUTE MATRIX BOUNDARY</button>
+    </section>
+
+    <main class="workspace">
+        
+        <section class="glass-panel">
+            <div class="panel-header">
+                <h3 id="ln-panel1-title">Interactive Diagnostic Suite</h3>
+                <span class="mono" style="color: var(--synapse-blue);">SYS_LIVE // 2026</span>
+            </div>
+            <p style="margin-bottom: 20px; font-size: 1rem;" id="ln-panel1-desc">Trigger a real-time calibration scan across localized neurological receptors to monitor current structural data efficiency indexes.</p>
+            
+            <div class="scanner-hud">
+                <div class="mono" id="ln-scan-status" style="letter-spacing: 1px; color: var(--synapse-blue);">SYSTEM IDLE // READY FOR INPUT</div>
+                <div class="scan-bar-container">
+                    <div class="scan-bar-fill" id="scan-progress-element"></div>
+                </div>
+                <button class="cta-glow-btn" style="padding: 10px 25px; font-size: 0.9rem;" id="ln-scan-btn" onclick="executeDiagnosticScanCalibration()">INITIALIZE BIOMETRIC SCAN</button>
+            </div>
+        </section>
+
+        <section class="glass-panel panel-orange">
+            <div class="panel-header">
+                <h3 id="ln-panel2-title">Threat Mitigation Core</h3>
+                <span class="mono" style="color: var(--plasma-orange);">SHIELD_ACTIVE</span>
+            </div>
+            <p style="margin-bottom: 20px; font-size: 1rem;" id="ln-panel2-desc">A hardened kernel architecture monitoring continuous runtime operations to block unauthorized script extraction loops automatically.</p>
+            
+            <div class="console-box mono" id="terminal-log-output-box">
+                </div>
+
+            <div class="audio-eq-bars">
+                <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <section class="system-walkthrough">
+        <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 10px;" id="ln-walk-title">Mainframe Operational Manual</h2>
+        <p style="text-align: center; color: var(--text-dim); max-width: 600px; margin: 0 auto 30px auto;" id="ln-walk-subtitle">Follow these sequential infrastructure guide blocks to successfully lock down and authenticate your external node architecture.</p>
+        
+        <div class="walkthrough-grid">
+            <div class="walkthrough-card">
+                <h3 id="ln-card1-title">01 // Grid Connection</h3>
+                <p id="ln-card1-desc">Establish stable secure tunnels back to local host decentralized routing servers using multi-channel high-velocity connections.</p>
+            </div>
+            <div class="walkthrough-card">
+                <h3 id="ln-card2-title">02 // Armor Integrity</h3>
+                <p id="ln-card2-desc">Verify structural graphene mesh metrics via deep kinetic sensor probes to isolate and patch structural stress fatigue points.</p>
+            </div>
+            <div class="walkthrough-card">
+                <h3 id="ln-card3-title">03 // Quantum Lock</h3>
+                <p id="ln-card3-desc">Authorize local hardware keys against immutable ledger addresses to prevent cryptographic code cloning actions completely.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Total Omnidirectional Localization Dictionary Node Map
+        const globalTranslationMatrix = {
+            en: {
+                navHome: "System Overview", navOps: "Core Ops", navShield: "Shield Security",
+                heroTitle: "Neural Platforms<br><span>Reconstructed.</span>",
+                heroDesc: "Experience an unprecedented architectural standard in biomechanical human system links. This core deployment mainframe initiates sub-atomic encryption nodes and hyper-frequency node protection routines seamlessly.",
+                heroBtn: "EXECUTE MATRIX BOUNDARY",
+                p1Title: "Interactive Diagnostic Suite",
+                p1Desc: "Trigger a real-time calibration scan across localized neurological receptors to monitor current structural data efficiency indexes.",
+                scanStatusIdle: "SYSTEM IDLE // READY FOR INPUT",
+                scanStatusActive: "SCANNING CEPHALIC TISSUE MATRIX... ",
+                scanStatusDone: "DIAGNOSTIC PROCESS COMPLETE. MERGE SUCCESSFUL.",
+                scanBtn: "INITIALIZE BIOMETRIC SCAN",
+                p2Title: "Threat Mitigation Core",
+                p2Desc: "A hardened kernel architecture monitoring continuous runtime operations to block unauthorized script extraction loops automatically.",
+                walkTitle: "Mainframe Operational Manual",
+                walkSubtitle: "Follow these sequential infrastructure guide blocks to successfully lock down and authenticate your external node architecture.",
+                c1Title: "01 // Grid Connection",
+                c1Desc: "Establish stable secure tunnels back to local host decentralized routing servers using multi-channel high-velocity connections.",
+                c2Title: "02 // Armor Integrity",
+                c2Desc: "Verify structural graphene mesh metrics via deep kinetic sensor probes to isolate and patch structural stress fatigue points.",
+                c3Title: "03 // Quantum Lock",
+                c3Desc: "Authorize local hardware keys against immutable ledger addresses to prevent cryptographic code cloning actions completely."
+            },
+            hi: {
+                navHome: "सिस्टम सिंहावलोकन", navOps: "मुख्य ऑपरेशन्स", navShield: "शील्ड सुरक्षा",
+                heroTitle: "न्यूरल प्लेटफॉर्म<br><span>पुनर्निर्मित।</span>",
+                heroDesc: "बायोमैकेनिकल मानव प्रणालियों के क्षेत्र में एक अभूतपूर्व तकनीकी मानक का अनुभव करें। यह कोर मेनफ़्रेम उप-परमाणु एन्क्रिप्शन नोड्स और हाइपर-फ्रीक्वेंसी सुरक्षा प्रणालियों को सुचारू रूप से तैनात करता है।",
+                heroBtn: "मैट्रिक्स सीमा निष्पादित करें",
+                p1Title: "इंटरएक्टिव डायग्नोस्टिक सुइट",
+                p1Desc: "स्थानीयकृत तंत्रिका रिसेप्टर्स की दक्षता सूचकांकों की निगरानी के लिए वास्तविक समय में अंशांकन स्कैन शुरू करें।",
+                scanStatusIdle: "सिस्टम निष्क्रिय // इनपुट के लिए तैयार",
+                scanStatusActive: "मस्तिष्क ऊतक मैट्रिक्स को स्कैन किया जा रहा है... ",
+                scanStatusDone: "नैदानिक प्रक्रिया पूरी हुई। एकीकरण सफल।",
+                scanBtn: "बायोमेट्रिक स्कैन प्रारंभ करें",
+                p2Title: "खतरा शमन कोर",
+                p2Desc: "अनधिकृत स्रोत कोड निष्कर्षण और दुर्भावनापूर्ण स्क्रिप्ट हमलों को स्वचालित रूप से ब्लॉक करने वाली एक सुरक्षित कर्नेल वास्तुकला।",
+                walkTitle: "मेनफ़्रेम परिचालन नियमावली",
+                walkSubtitle: "अपने बाहरी नोड सुरक्षा ग्रिड को सफलतापूर्वक लॉक और प्रमाणित करने के लिए इन क्रमिक निर्देशों का पालन करें।",
+                c1Title: "01 // ग्रिड कनेक्शन",
+                c1Desc: "मल्टी-चैनल हाई-वेलोसिटी लिंक का उपयोग करके विकेंद्रीकृत लोकल राउटिंग सर्वर के लिए सुरक्षित टनल स्थापित करें।",
+                c2Title: "02 // कवच अखंडता",
+                c2Desc: "तनाव बिंदुओं को अलग करने और पैच करने के लिए गहन काइनेटिक सेंसर जांच के माध्यम से ग्राफीन जाल मेट्रिक्स को सत्यापित करें।",
+                c3Title: "03 // क्वांटम लॉक",
+                c3Desc: "क्रिप्टोग्राफिक कोड क्लोनिंग क्रियाओं को पूरी तरह से रोकने के लिए अपरिवर्तनीय लेज़र पतों के विरुद्ध हार्डवेयर कुंजियों को प्रमाणित करें।"
+            },
+            es: {
+                navHome: "Resumen del Sistema", navOps: "Operaciones Centrales", navShield: "Seguridad del Escudo",
+                heroTitle: "Plataformas Neurales<br><span>Reconstruidas.</span>",
+                heroDesc: "Experimente un estándar arquitectónico sin precedentes en enlaces de sistemas humanos biomecánicos. Este sistema de implementación inicia módulos de cifrado subatómico de forma segura.",
+                heroBtn: "EJECUTAR LÍMITE DE MATRIZ",
+                p1Title: "Suite de Diagnóstico Interactiva",
+                p1Desc: "Active un escaneo de calibración en tiempo real en los receptores neurológicos para monitorear los índices de eficiencia de datos.",
+                scanStatusIdle: "SISTEMA INACTIVO // LISTO PARA ENTRADA",
+                scanStatusActive: "ESCANEANDO MATRIZ DE TEJIDO CEFÁLICO... ",
+                scanStatusDone: "PROCESO DE DIAGNÓSTICO COMPLETO. COMBINACIÓN EXITOSA.",
+                scanBtn: "INICIAR ESCANEO BIOMÉTRICO",
+                p2Title: "Núcleo de Mitigación de Amenazas",
+                p2Desc: "Una arquitectura de kernel reforzada que monitorea las operaciones en tiempo real para bloquear bucles de extracción de scripts no autorizados.",
+                walkTitle: "Manual de Operación del Mainframe",
+                walkSubtitle: "Siga estos bloques secuenciales de infraestructura para bloquear y autenticar con éxito su arquitectura de nodos.",
+                c1Title: "01 // Conexión de Red",
+                c1Desc: "Establezca túneles seguros estables de regreso a los servidores de enrutamiento descentralizados locales utilizando conexiones de alta velocidad.",
+                c2Title: "02 // Integridad de Armadura",
+                c2Desc: "Verifique las métricas de la malla de grafeno mediante sondas de sensores cinéticos para aislar y reparar puntos de fatiga estructural.",
+                c3Title: "03 // Bloqueo Cuántico",
+                c3Desc: "Autorice las claves de hardware locales contra direcciones de contabilidad inmutables para evitar la clonación de código criptográfico."
+            },
+            zh: {
+                navHome: "系统总览", navOps: "核心操作", navShield: "护盾防御",
+                heroTitle: "神经连接平台<br><span>架构重塑。</span>",
+                heroDesc: "见证生物力学人机系统接口中前所未有的架构标准。该部署大型机可天衣无缝地启动亚原子加密节点与超高频节点防护程序。",
+                heroBtn: "执行矩阵边界防护",
+                p1Title: "交互式诊断套件",
+                p1Desc: "触发针对局部神经感受器的实时校准扫描，以监测当前结构数据的传输效率指标。",
+                scanStatusIdle: "系统空闲 // 等待指令输入",
+                scanStatusActive: "正在扫描大脑组织矩阵... ",
+                scanStatusDone: "诊断过程结束。系统数据合并成功。",
+                scanBtn: "启动生物特征扫描",
+                p2Title: "威胁缓解核心核心",
+                p2Desc: "加固的内核架构，持续监控实时运行状态，自动拦截并粉碎未经授权的源代码提取循环。",
+                walkTitle: "大型机操作手册",
+                walkSubtitle: "请遵循以下序列化的基础设施指南模块，以成功锁定并认证您的外部节点架构。",
+                c1Title: "01 // 网络格栅连接",
+                c1Desc: "利用多通道高速率数据链路，建立返回本地去中心化路由服务器的安全隧道。",
+                c2Title: "02 // 装甲结构验证",
+                c2Desc: "通过深层动力学传感器探针验证石墨烯网格指标，以隔离并修复结构应力疲劳点。",
+                c3Title: "03 // 量子加密锁定",
+                c3Desc: "针对不可篡改的账本地址对本地硬件密钥进行确权认证，彻底杜绝密码学代码克隆行为。"
+            },
+            ja: {
+                navHome: "システム概要", navOps: "コア作戦", navShield: "シールドセキュリティ",
+                heroTitle: "ニューラルプラットフォーム<br><span>完全再構築。</span>",
+                heroDesc: "生体機械的な人間システムリンクにおける、前例のない新しいアーキテクチャ標準を体感してください。このメインフレームは、亜原子暗号化ノードを動的に展開します。",
+                heroBtn: "マトリックス境界を実行",
+                p1Title: "対話型診断スイート",
+                p1Desc: "局所的な神経受容体全体のリアルタイムキャリブレーションスキャンをトリガーし、構造データの効率インデックスを監視します。",
+                scanStatusIdle: "システム待機中 // 入力準備完了",
+                scanStatusActive: "頭部組織マトリックスをスキャン中... ",
+                scanStatusDone: "診断プロセス完了。システム統合に成功しました。",
+                scanBtn: "バイオメトリックスキャンを開始",
+                p2Title: "脅威緩和コアシステム",
+                p2Desc: "許可されていないスクリプト抽出ループを自動的にブロックするために、継続的な実行時操作を監視する堅牢なカーネルアーキテクチャ。",
+                walkTitle: "メインフレーム操作マニュアル",
+                walkSubtitle: "外部ノードのアーキテクチャを正常にロックダウンおよび認証するために、これらの順次手順に従ってください。",
+                c1Title: "01 // グリッド接続",
+                c1Desc: "マルチチャネル高速接続を使用して、ローカルホストの分散型ルーティングサーバーへの安定したセキュアトンネルを確立します。",
+                c2Title: "02 // 装甲の完全性",
+                c2Desc: "深部動的センサープローブを介してグラフェンメッシュメトリクスを検証し、構造疲労箇所を特定して修復します。",
+                c3Title: "03 // 量子ロック",
+                c3Desc: "暗号化コードの複製行為を完全に防止するために、不変の台帳アドレスに対してローカルハードウェアキーを認証します。"
+            }
+        };
+
+        // Complete Omnidirectional UI Translation Processor Engine
+        function processGlobalTranslation() {
+            const chosenLang = document.getElementById('lang-engine-trigger').value;
+            const dict = globalTranslationMatrix[chosenLang];
+
+            // 1. Navigation Matrix Links
+            document.getElementById('ln-nav-home').textContent = dict.navHome;
+            document.getElementById('ln-nav-ops').textContent = dict.navOps;
+            document.getElementById('ln-nav-shield').textContent = dict.navShield;
+
+            // 2. Hero Component Elements
+            document.getElementById('ln-hero-title').innerHTML = dict.heroTitle;
+            document.getElementById('ln-hero-desc').textContent = dict.heroDesc;
+            document.getElementById('ln-hero-btn').textContent = dict.heroBtn;
+
+            // 3. Diagnostics Component Panel
+            document.getElementById('ln-panel1-title').textContent = dict.p1Title;
+            document.getElementById('ln-panel1-desc').textContent = dict.p1Desc;
+            document.getElementById('ln-scan-btn').textContent = dict.scanBtn;
+            
+            // Check state to properly preserve translated current diagnostic text strings
+            const scanBarWidth = document.getElementById('scan-progress-element').style.width;
+            if (scanBarWidth === "0%" || scanBarWidth === "") {
+                document.getElementById('ln-scan-status').textContent = dict.scanStatusIdle;
+            } else if (scanBarWidth === "100%") {
+                document.getElementById('ln-scan-status').textContent = dict.scanStatusDone;
+            }
+
+            // 4. Firewall Panel Components
+            document.getElementById('ln-panel2-title').textContent = dict.p2Title;
+            document.getElementById('ln-panel2-desc').textContent = dict.p2Desc;
+
+            // 5. Instruction Manual Cards Matrix
+            document.getElementById('ln-walk-title').textContent = dict.walkTitle;
+            document.getElementById('ln-walk-subtitle').textContent = dict.walkSubtitle;
+            document.getElementById('ln-card1-title').textContent = dict.c1Title;
+            document.getElementById('ln-card1-desc').textContent = dict.c1Desc;
+            document.getElementById('ln-card2-title').textContent = dict.c2Title;
+            document.getElementById('ln-card2-desc').textContent = dict.c2Desc;
+            document.getElementById('ln-card3-title').textContent = dict.c3Title;
+            document.getElementById('ln-card3-desc').textContent = dict.c3Desc;
+
+            appendTerminalActivityLog(`TRANS_ENGINE: Language switched to channel [${chosenLang.toUpperCase()}].`);
+        }
+
+        // Interactive Feature: Running Neural Bar Progress Timers
+        function executeDiagnosticScanCalibration() {
+            const progressBar = document.getElementById('scan-progress-element');
+            const statusText = document.getElementById('ln-scan-status');
+            const targetLang = document.getElementById('lang-engine-trigger').value;
+            
+            let percentage = 0;
+            progressBar.style.width = "0%";
+            statusText.textContent = globalTranslationMatrix[targetLang].scanStatusActive + "0%";
+
+            const trackingInterval = setInterval(() => {
+                percentage += 4;
+                progressBar.style.width = percentage + "%";
+                statusText.textContent = globalTranslationMatrix[targetLang].scanStatusActive + percentage + "%";
+
+                if (percentage >= 100) {
+                    clearInterval(trackingInterval);
+                    statusText.textContent = globalTranslationMatrix[targetLang].scanStatusDone;
+                    appendTerminalActivityLog("DIAGNOSTICS: Neural telemetry map merged into primary stack.");
+                }
+            }, 80);
+        }
+
+        function engageShieldVerification() {
+            alert("ALARM CONFIG: Host verification token active across remote grid arrays.");
+            appendTerminalActivityLog("KERNEL: Operational boundary token pushed successfully.");
+        }
+
+        // Automated continuous terminal log output generator
+        function runContinuousTerminalFeedLoop() {
+            const systemAlertStrings = [
+                "SECURITY: Script scraping attempt deflected on global vector window.",
+                "FIREWALL: Dynamic network handshake verified against remote database.",
+                "INTEGRITY: Graphene shell structural verification loops optimal.",
+                "SUBNET: Re-routing system telemetry streams through local proxies."
+            ];
+
+            setInterval(() => {
+                const randomAlertText = systemAlertStrings[Math.floor(Math.random() * systemAlertStrings.length)];
+                appendTerminalActivityLog(randomAlertText);
+            }, 2200);
+        }
+
+        function appendTerminalActivityLog(logMessageText) {
+            const logBox = document.getElementById('terminal-log-output-box');
+            const systemTimestamp = new Date().toLocaleTimeString();
+            const logElementNode = document.createElement('div');
+            logElementNode.className = "console-line";
+            
+            let structuredStyle = "";
+            if(logMessageText.includes("SECURITY")) {
+                structuredStyle = "class='text-alert'";
+            }
+
+            logElementNode.innerHTML = `<span class="stamp">[${systemTimestamp}]</span><span ${structuredStyle}>${logMessageText}</span>`;
+            logBox.appendChild(logElementNode);
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+
+        // Window Startup Hooks
+        window.addEventListener('DOMContentLoaded', () => {
+            runContinuousTerminalFeedLoop();
+            appendTerminalActivityLog("SYSTEM: XENO Mainframe initialized safely on port 443.");
+        });
+    </script>
+</body>
+</html>
